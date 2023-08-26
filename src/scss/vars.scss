@@ -1,3 +1,10 @@
-$allow-dark-mode: true;
+$allow-dark-mode: false; // TODO: implement dark mode and change to true
 $breakpoint-tablet: 1023px;
 $breakpoint-mobile: 767px;
+
+$global-radius: 0.5rem;
+
+$pt-white: #fefefe;
+$pt-light-grey: #eeeeee;
+$pt-black: #141414;
+$pt-blue: #1a79bc;

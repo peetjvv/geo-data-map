@@ -7,6 +7,8 @@
   height: 100vh;
 
   .content {
+    width: 100vw;
+    height: 100vh;
   }
 }
 
@@ -17,3 +19,5 @@
 // mobile
 @media screen and (max-width: $breakpoint-mobile) {
 }
+
+@import '../app/map/styles.scss';

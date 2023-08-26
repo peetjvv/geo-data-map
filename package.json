@@ -5,13 +5,13 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest --coverage",
-    "start": "webpack serve --mode=development --host 0.0.0.0 --history-api-fallback",
-    "clean": "rimraf build",
+    "start": "dotenv -e .env -e .env.dev -- webpack serve --mode=development --host 0.0.0.0 --history-api-fallback",
+    "clean": "rimraf dist",
     "webpack-build": "webpack --mode=production",
     "build": "npm run clean && npm run webpack-build",
     "eslint": "eslint src --color --cache",
     "eslint:fix": "npm run lint -- --fix",
-    "serve": "npm run build && http-server build --proxy http://localhost:8080?",
+    "serve": "npm run build && http-server dist --proxy http://localhost:8080?",
     "prettier": "prettier --check *.{js,ts,tsx,json,scss,css,md}",
     "prettier:write": "prettier --write *.{js,ts,tsx,json,scss,css,md}"
   },
@@ -40,8 +40,15 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "axios": "^1.4.0",
+    "mapbox-gl": "^2.15.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-18-input-autosize": "^3.0.0",
+    "react-dom": "^18.2.0",
+    "react-map-gl": "^7.1.5"
   },
   "devDependencies": {
     "@jest/globals": "^29.6.4",
@@ -51,10 +58,12 @@
     "@types/node": "18",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "@types/react-input-autosize": "^2.2.1",
     "@types/webpack": "^5.28.2",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "css-loader": "^6.8.1",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8.48.0",
     "eslint-plugin-react": "^7.33.2",
     "html-loader": "^4.2.0",
