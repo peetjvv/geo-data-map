@@ -1,0 +1,12 @@
+node_modules
+build
+
+# firebase
+.firebase
+firebase-debug.log
+
+# linting
+.eslintcache
+
+# jest test coverage
+coverage

@@ -1,0 +1,24 @@
+body {
+  margin: unset;
+
+  font-family: 'Sniglet', cursive;
+  font-size: 1rem;
+}
+
+// dark mode overrides
+@if $allow-dark-mode {
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: white;
+      background: darkslategrey;
+    }
+  }
+}
+
+// tablet
+@media screen and (max-width: $breakpoint-tablet) {
+}
+
+// mobile
+@media screen and (max-width: $breakpoint-mobile) {
+}
