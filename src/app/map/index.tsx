@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import ReactMapGl, { MapRef, ScaleControl, ViewState } from 'react-map-gl';
 import MapboxGeocoder from './mapbox-geocoder';
 import MapControlsToolbar from './map-controls-toolbar';
@@ -7,27 +7,25 @@ import MapStyleToolbar from './map-style-toolbar';
 import { MapStyleName } from '../../data/mapbox/types';
 import { throwIfNotNever } from '../../util/typescript';
 
-const Map: React.FC<{
-  mapStyle: MapStyleName;
-}> = props => {
-  const { mapStyle } = props;
-
+const Map: React.FC = () => {
   const mapRef = useRef<MapRef | null>(null);
   const bottomCenterControlsContainerRef = useRef<HTMLDivElement | null>(null);
 
-  let mapStyleUrl: string | undefined;
-  switch (mapStyle) {
-    case 'streets':
-      mapStyleUrl = `mapbox://styles/mapbox/streets-v11`;
-      break;
-    case 'satellite-streets':
-      mapStyleUrl = `mapbox://styles/mapbox/satellite-streets-v11`;
-      break;
+  const [mapStyle, setMapStyle] = useState<MapStyleName>('streets');
+  const mapStyleUrl = useMemo(() => {
+    switch (mapStyle) {
+      case 'streets':
+        return `mapbox://styles/mapbox/streets-v11`;
+      case 'satellite-streets':
+        return `mapbox://styles/mapbox/satellite-streets-v11`;
 
-    default:
-      throwIfNotNever(mapStyle);
-      break;
-  }
+      default:
+        throwIfNotNever(mapStyle);
+        break;
+    }
+
+    return `mapbox://styles/mapbox/streets-v11`;
+  }, [mapStyle]);
 
   const [viewState, setViewState] = useState<ViewState>({
     latitude: 0,
@@ -62,7 +60,7 @@ const Map: React.FC<{
     <div className="map-container">
       <ReactMapGl
         {...viewState}
-        // TODO: setViewState
+        onMove={({ viewState }) => setViewState(viewState)}
         style={{ width: '100%', height: '100%' }}
         mapboxAccessToken={process.env.MAPBOX_TOKEN}
         ref={mapRef}
@@ -97,13 +95,7 @@ const Map: React.FC<{
       <div className="map-controls-container bottom left">
         <MapStyleToolbar
           value={mapStyle}
-          onChange={style => {
-            // dispatch({
-            //   type: 'MAPBOX',
-            //   subType: 'SET_MAP_STYLE',
-            //   payload: style,
-            // });
-          }}
+          onChange={style => setMapStyle(style)}
         />
       </div>
       <div

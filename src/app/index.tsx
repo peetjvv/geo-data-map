@@ -3,7 +3,7 @@ import Map from './map';
 
 const App: React.FC = () => (
   <div className="content">
-    <Map mapStyle="streets" />
+    <Map />
   </div>
 );
 
