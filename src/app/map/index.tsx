@@ -65,7 +65,6 @@ const Map: React.FC = () => {
         mapboxAccessToken={process.env.MAPBOX_TOKEN}
         ref={mapRef}
         mapStyle={mapStyleUrl}
-        doubleClickZoom={false}
         // clickRadius={5}
         // cursor={({ isHovering, isDragging }) =>
         //   isDragging ? 'grabbing' : isHovering ? 'pointer' : 'default'
